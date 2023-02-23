@@ -1,4 +1,4 @@
-# Implementations of algorithms which I've studied in the past
+# Implementations of algorithms which I studied in the past
 ## implemented algorithms:
   - Bubble sort
   - Selection sort
