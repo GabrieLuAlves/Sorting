@@ -4,6 +4,7 @@
 
 #include "sort.h"
 
+
 enum SortingAlgorithms {
 	BUBBLESORT = 0,
 	SELECTIONSORT,
@@ -40,11 +41,11 @@ void readFlags(int argc, char** argv) {
 	for (i = 1 ; i < argc ; i++) {
 		if(argv[i][0] == '-') {
 			if (strcmp(argv[i] + 1, "m") == 0) {
-				if (strcmp(argv[i + 1], "bubble") == 0) algorithm = 0;
-				else if(strcmp(argv[i + 1], "selection") == 0) algorithm = 1;
-				else if(strcmp(argv[i + 1], "insertion") == 0) algorithm = 2;
-				else if(strcmp(argv[i + 1], "quick") == 0) algorithm = 3;
-				else if(strcmp(argv[i + 1], "merge") == 0) algorithm = 4;
+				if (strcmp(argv[i + 1], "bubble") == 0) algorithm = BUBBLESORT;
+				else if(strcmp(argv[i + 1], "selection") == 0) algorithm = SELECTIONSORT;
+				else if(strcmp(argv[i + 1], "insertion") == 0) algorithm = INSERTIONSORT;
+				else if(strcmp(argv[i + 1], "quick") == 0) algorithm = QUICKSORT;
+				else if(strcmp(argv[i + 1], "merge") == 0) algorithm = MERGESORT;
 				else {
 					printf("Unknown sorting method \"%s\"\n", argv[i + 1]);				
 					exit(0);
@@ -57,34 +58,38 @@ void readFlags(int argc, char** argv) {
 	}	
 }
 
-int main(int argc, char** argv) {
+int main(int argc, char** argv)
+{
 	size_t lastElementIndex = 0;
 
 	readFlags(argc, argv);
+	
+	printf("Reading input from: %s\n", DEFAULT_INPUT_FILE);
 
 	int *elements = readArray(&lastElementIndex);
 	
 	lastElementIndex--;
 
 	switch (algorithm) {
-		case 0:
+		case BUBBLESORT:
 			bubblesort(elements, 0, lastElementIndex);
 			break;
 
-		case 1:
+		case SELECTIONSORT:
 			selectionsort(elements, 0, lastElementIndex);
 			break;
 
-		case 2:
+		case INSERTIONSORT:
 			insertionsort(elements, 0, lastElementIndex);
 			break;
 		
-		case 3:
+		case QUICKSORT:
 			quicksort(elements, 0, lastElementIndex);
 			break;
 
-		case 4:
+		case MERGESORT:
 			mergesort(elements, 0, lastElementIndex);
+			break;
 	} 
 
 	displayArray(elements, 0, lastElementIndex);
